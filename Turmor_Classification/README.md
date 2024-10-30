@@ -1,4 +1,5 @@
 # Pytorch
+<<<<<<< HEAD
 
 
 Tumor Classification with CNN
@@ -22,3 +23,5 @@ Prerequisites
     torchvision
     tqdm
     matplotlib
+=======
+>>>>>>> 65449be (updated)

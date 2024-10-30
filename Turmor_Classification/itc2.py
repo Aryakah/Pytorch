@@ -10,6 +10,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 import cv2 
 import torch.nn.functional as F
 from tqdm import tqdm
+import PyQt5
 
 
 
@@ -39,22 +40,25 @@ else:
     device = torch.device("cpu")
     print("Using CPU")
 
+
+
+
 model = mCNN().to(device)
 
 criterion = nn.BCELoss()  
-optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1)
+optimizer = torch.optim.Adam(params=model.parameters(), lr=0.001)
 
 
 
 tumor = []
-path_t = "Data/archive/yes/Y*"
+path_t = "Turmor_Classification/Data/archive/yes/Y*"
 for f in glob.iglob(path_t):
     img = cv2.imread(f)
     img = cv2.resize(img,(128,128))
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     tumor.append(img)
 
-path_h = "Data/archive/no/*"
+path_h = "Turmor_Classification/Data/archive/no/*"
 healthy = []
 for f in glob.iglob(path_h):
     img = cv2.imread(f)
@@ -92,7 +96,8 @@ transform = transforms.Compose([
     transforms.ToTensor(),         
 
 ])
-root = 'Data/archive'
+
+root = 'Turmor_Classification/Data/archive'
 mdataset = datasets.ImageFolder(root, transform=transform)
 
 
@@ -127,7 +132,7 @@ for epoch in range(num_epochs):
            
             
             loss.backward()
-            print ("Hi")
+            
             optimizer.step()
             
             running_loss += loss.item()
