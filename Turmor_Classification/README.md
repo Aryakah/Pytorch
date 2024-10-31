@@ -1,4 +1,4 @@
-# Pytorch
+# Training on CNN Model
 <<<<<<< HEAD
 
 
